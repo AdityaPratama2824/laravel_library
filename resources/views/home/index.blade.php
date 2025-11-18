@@ -2,7 +2,15 @@
 
 <div class="container mt-5 bg-warning p-5 text-center">
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-12">
+    
+        @if(session('error'))
+            <div class="alert alert-danger">
+                <ul>
+                    <li>{{ session('error') }}</li>
+                </ul>
+            </div>
+        @endif
+    <div class="col-lg-6 col-md-6 col-12">
             <a href="/book">
                 <div class="card bg-success text-light m-2">
                     <h1>BOOK</h1>

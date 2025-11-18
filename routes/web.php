@@ -6,6 +6,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BorrowController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -16,12 +17,14 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'register']);
 Route::post('/register', [AuthController::class, 'createMember']);
 
-Route::post('/logout', [AuthController::class, 'logout']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 // ADMIN
-Route::prefix('/admin')->group(function(){
+Route::middleware('admin')->prefix('/admin')->group(function(){
     Route::apiResource('borrow', BorrowController::class);
     Route::apiResource('category', CategoryController::class);
     Route::apiResource('book', BookController::class);
+
+    Route::get('/', [AdminController::class, 'index']);
 });

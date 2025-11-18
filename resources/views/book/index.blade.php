@@ -16,6 +16,13 @@
                     </ul>
                 </div>
             @endif
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+    @csrf
+</form>
+<a href="/">Home</a>
+<a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+    Logout
+</a>
             <form method="POST">
                 @csrf
                 <div class="row">
@@ -73,7 +80,7 @@
                             <th>Category Name</th>
                             <th>Title</th>
                             <th>Author</th>
-                            <th>Qty</th>
+                            <th>Quantity</th>
                             <th>Year</th>
                             <th>Action</th>
                         </tr>
@@ -87,14 +94,13 @@
                                 <td>{{  $book->author }} </td>
                                 <td>{{  $book->qty }} </td>
                                 <td>{{  $book->year }} </td>
-                                <td>
-                                    <a href="/admin/book/{{  $book->id }}">Update</a>
+                                  <td class="d-flex gap-2">
+                                    <a href="/admin/book/{{  $book->id }}"  class="btn btn-sm btn-warning">Update</a>
                                     <form method="POST" action="/admin/book/{{  $book->id }}">
-                                        @method('DELETE')
-                                         @csrf
-                                    <button type="submit">
-                                        Delete</submit>
-                                    </form>
+           @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
                                 </td>
                             </tr>
                         @endforeach

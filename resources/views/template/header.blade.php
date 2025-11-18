@@ -6,7 +6,7 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <link  href="{{ asset('/style/bootstrap.min.css') }}" rel="stylesheet" />
+        <link  href="{{ asset('style/bootstrap.min.css') }}" rel="stylesheet" />
         
     </head>
     <body>

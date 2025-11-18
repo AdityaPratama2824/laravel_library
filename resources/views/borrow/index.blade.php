@@ -22,7 +22,7 @@
                     <div class="col-lg-6 col-12">
                         <select 
                             class="form-control mb-2"
-                            name="category_id">
+                            name="book_id">
                             <option value=""> Select Book </option>
                             @foreach ($books as $book)
                                 <option value="{{ $book->id }}">{{ $book->title }}</option>                                
@@ -30,7 +30,7 @@
                         </select>
                         <select 
                             class="form-control mb-2"
-                            name="category_id">
+                            name="user_id">
                             <option value=""> Select Member </option>
                                 @foreach ($users as $user)
                                 <option value="{{ $user->id }}">{{ $user->name }}</option>                                
@@ -54,12 +54,12 @@
                             value="{{ old('start_borrow') }}"
                             />
                          <input 
-                            disabled
-                            id="end_borrow"
-                            class="form-control mb-2"
-                            type="date"
-                            name="end_borrow"
-                            placeholder="Author"
+                         id="end_borrow"
+                         class="form-control mb-2"
+                         type="date"
+                         name="end_borrow"
+                         placeholder="Author"
+                         readonly
                             />
                         <button class="btn btn-primary my-2">
                             Submit
@@ -84,7 +84,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+                         @foreach ($borrows as $borrow)
+                            <tr>
+                                <td>{{ $loop->index +1 }}</td>
+                                <td>{{ $borrow->name }}</td>
+                                <td>{{ $borrow->title }}</td>
+                                <td>{{ $borrow->start_borrow }}</td>
+                                <td>{{ $borrow->end_borrow }}</td>
+                                <td>{{ $borrow->qty }}</td>
+                                <td>{{ $borrow->fine }}</td>
+
+                                <td>
+                                    <p class="text-warning">Pending</p>
+                                </td>
+
+                                <td class="d-flex gap-2">
+                            <a href="/admin/borrow/{{ $borrow->id }}" class="btn btn-sm btn-warning">Update</a>
+                            <form method="POST" action="/admin/borrow/{{ $borrow->id }}">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -30,14 +30,14 @@ class User extends Authenticatable
         ];
     }
 
-    public function roles(): BelongsToMany
-    {
-        return $this->belongsToMany(Role::class, 'role_users', 'user_id', 'role_id');
-    }
+public function roles()
+{
+    return $this->belongsToMany(Role::class, 'role_users', 'user_id', 'role_id');
+}
 
-    // buat cek admin
-    public function isAdmin()
-    {
-        return $this->roles()->where('role_id', 1)->exists();
-    }
+
+public function isAdmin()
+{
+    return $this->roles()->where('role_name', 'admin')->exists();
+}
 }
